@@ -1,0 +1,824 @@
+/* Importações e Variáveis Globais */
+:root {
+    --primary-red: #D42027;
+    --dark-red: #B31217;   /* Usado para .candidates-bar e .info-section */
+    --yellow-highlight: #FECB00;
+    --light-red-bg: #fdeeee;
+    --text-color: #333333;
+    --light-text: #FFFFFF;
+    /*
+       NOTA SOBRE FONTES:
+       A fonte oficial Tungsten é comercial. Se você tiver os arquivos licenciados (ex: .woff2, .woff),
+       descomente e ajuste o @font-face abaixo e mude a variável --title-font.
+       Caso contrário, Anton ou Oswald são boas alternativas gratuitas.
+    */
+    /*
+    @font-face {
+        font-family: 'Tungsten';
+        src: url('../fonts/Tungsten-Bold.woff2') format('woff2'),
+             url('../fonts/Tungsten-Bold.woff') format('woff');
+        font-weight: 700; // ou o peso que você tiver
+        font-style: normal;
+    }
+    --title-font: 'Tungsten', 'Anton', sans-serif;
+    */
+    --title-font: 'Anton', sans-serif; /* Usando Anton como fallback principal */
+    --body-font: 'Roboto', sans-serif;
+    --border-radius: 8px;
+    --nav-height: 70px; /* Altura da barra de navegação */
+}
+
+html {
+    scroll-behavior: smooth; /* Para scroll suave dos links da navegação */
+}
+
+/* Ajuste global para o corpo do texto */
+body {
+    font-family: var(--body-font);
+    margin: 0;
+    padding: 0;
+    padding-top: var(--nav-height); /* Espaço para a navegação fixa */
+    color: var(--text-color);
+    background-color: #f4f4f4;
+    font-size: 1.2rem; /* Aumenta o tamanho base do texto */
+    line-height: 1.8; /* Melhora o espaçamento entre linhas */
+}
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 15px; /* Adicionado padding lateral ao container */
+}
+
+/* Títulos */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--title-font);
+    color: var(--primary-red);
+    margin-top: 0;
+    margin-bottom: 0.8em;
+    line-height: 1.2;
+    font-size: 2.8rem; /* Aumenta o tamanho dos títulos */
+}
+
+h2 {
+    font-size: 2.6rem; /* Ajuste específico para h2 */
+}
+
+/* (Outros estilos base) */
+
+/* Navegação Fixa */
+#main-nav {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-bottom: 1px solid #ddd;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    height: var(--nav-height);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#main-nav.scrolled {
+    background-color: rgba(255, 255, 255, 1); /* Mais opaco ao rolar */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--primary-red);
+    font-family: var(--title-font);
+    font-size: 1.2rem;
+}
+
+#nav-party-logo {
+    height: 35px; /* Tamanho do logo na nav */
+    margin-right: 10px;
+}
+
+#main-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+#main-nav ul li {
+    margin-left: 20px;
+}
+
+#main-nav ul li a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 500;
+    padding: 5px 0;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+#main-nav ul li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--primary-red);
+    transition: width 0.3s ease;
+}
+
+#main-nav ul li a:hover, #main-nav ul li a.active {
+    color: var(--primary-red);
+}
+#main-nav ul li a:hover::after, #main-nav ul li a.active::after {
+    width: 100%;
+}
+
+
+/* Hero Section */
+.hero {
+    background-color: var(--light-text);
+    padding-top: 30px; /* Ajuste para acomodar a nav e o logo */
+    text-align: center;
+    position: relative;
+}
+
+.hero-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centralizar os itens agora */
+    padding-bottom: 30px;
+    padding-top: 80px; /* Aumentar um pouco o espaçamento superior */
+}
+
+.logo-container {
+    width: 100%;
+    display: flex;
+    justify-content: center; /* Centralizar o logo também */
+    padding: 0 0 30px 0; /* Aumentar a margem inferior do logo */
+    max-width: 300px; /* Limitar largura do logo se necessário */
+}
+
+#party-logo {
+    height: 180px;
+    width: auto;
+}
+
+.hero-content {
+    text-align: center;
+    width: 100%;
+}
+
+.hero-title-container {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 35px;
+}
+
+.main-title {
+    font-size: 4rem;
+    line-height: 1.05;
+    color: var(--primary-red);
+    text-transform: uppercase;
+    margin: 0;
+    position: relative;
+    z-index: 2;
+    text-align: left;
+    letter-spacing: -1.5px;
+    padding-left: 10px;
+}
+
+.main-title .yellow-text {
+    color: var(--yellow-highlight);
+}
+
+.starburst-shape {
+    width: 300px;
+    height: 300px;
+    background-color: var(--primary-red);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-40%, -50%) rotate(20deg);
+    z-index: 1;
+    clip-path: polygon(50% 0%, 65% 25%, 98% 35%, 70% 55%, 80% 90%, 50% 75%, 20% 90%, 30% 55%, 2% 35%, 35% 25%);
+    opacity: 0.9;
+}
+
+/* Contador Regressivo */
+#countdown-timer {
+    margin: 20px 0; /* Ajustar margem do contador */
+}
+#countdown-timer h3 {
+    font-family: var(--body-font);
+    font-size: 1.2rem;
+    color: var(--text-color);
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+#timer {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Espaço entre os blocos */
+}
+.time-block {
+    background-color: var(--primary-red);
+    color: var(--light-text);
+    padding: 10px 15px;
+    border-radius: var(--border-radius);
+    font-family: var(--body-font);
+    font-size: 0.9rem;
+    min-width: 80px; /* Largura mínima */
+}
+.time-block span {
+    display: block;
+    font-family: var(--title-font);
+    font-size: 2rem; /* Tamanho dos números */
+    line-height: 1;
+    margin-bottom: 3px;
+}
+
+
+.hero-cta {
+    margin: 20px 0 30px 0;
+}
+
+.hero-cta h2 {
+    background-color: var(--primary-red);
+    color: var(--light-text);
+    padding: 15px 35px;
+    border-radius: 6px;
+    display: inline-block;
+    font-size: 1.6rem;
+    font-family: var(--body-font);
+    font-weight: 900;
+    line-height: 1.3;
+}
+
+/* Barra de Candidatos ATUALIZADA */
+.candidates-bar {
+    background-color: var(--dark-red);
+    padding: 40px 0; /* Aumentar padding vertical */
+    width: 100%;
+    box-sizing: border-box;
+}
+.candidate-container-flex { /* Novo container para usar flex */
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start; /* Alinha pelo topo */
+    gap: 20px; /* Espaço entre os cards de candidato */
+}
+
+.candidate {
+    text-align: center;
+    flex: 1; /* Distribui o espaço igualmente */
+    max-width: 300px; /* Limita a largura de cada candidato */
+    color: var(--light-text);
+}
+
+.candidate img {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    background-color: #ccc;
+    border: 4px solid var(--light-text);
+    box-shadow: 0 4px 18px rgba(0,0,0,0.18); /* Sombra suave */
+    transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.candidate img:hover {
+    transform: scale(1.06);
+    box-shadow: 0 8px 28px rgba(0,0,0,0.25);
+}
+
+.candidate.nelsinho-main img {
+    width: 150px;
+    height: 150px;
+    border: 5px solid var(--yellow-highlight);
+    box-shadow: 0 6px 24px rgba(254,203,0,0.25), 0 4px 18px rgba(0,0,0,0.18);
+}
+
+.candidate.nelsinho-main img:hover {
+    transform: scale(1.08);
+    box-shadow: 0 12px 36px rgba(254,203,0,0.30), 0 8px 28px rgba(0,0,0,0.25);
+}
+
+.candidate-name {
+    font-family: var(--title-font);
+    font-size: 1.5rem; /* Tamanho dos nomes */
+    color: var(--light-text);
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    line-height: 1.1;
+}
+
+.candidate-role {
+    font-family: var(--body-font);
+    font-size: 0.9rem;
+    color: #eee; /* Um branco mais suave para o cargo */
+    margin-bottom: 15px;
+    line-height: 1.3;
+}
+
+.vote-number-badge {
+    font-family: var(--title-font);
+    font-size: 2rem; /* Tamanho do número */
+    padding: 8px 25px; /* Padding para dar forma ao balão */
+    border-radius: 30px; /* Cantos bem arredondados */
+    display: inline-block;
+    line-height: 1; /* Para alinhar o texto verticalmente */
+    font-weight: normal; /* Anton já é bold */
+}
+
+.vote-number-badge.white-badge {
+    background-color: var(--light-text);
+    color: var(--dark-red); /* Número vermelho no balão branco */
+}
+
+.vote-number-badge.yellow-badge {
+    background-color: var(--yellow-highlight);
+    color: var(--dark-red); /* Número vermelho no balão amarelo */
+}
+
+
+/* Info Section (Data, Local) ATUALIZADO */
+.info-section {
+    background-color: var(--light-red-bg);
+    padding: 40px 20px; /* Espaçamento interno */
+    text-align: center;
+    color: var(--text-color);
+    border-radius: var(--border-radius); /* Bordas arredondadas */
+    margin-bottom: 30px; /* Espaçamento inferior */
+}
+
+.info-section h2 {
+    font-size: 2rem;
+    margin-bottom: 20px; /* Espaçamento abaixo do título */
+    color: var(--primary-red);
+}
+
+.info-section p {
+    font-size: 1.4rem; /* Aumenta o tamanho do texto em seções importantes */
+    margin-bottom: 15px; /* Espaçamento entre os parágrafos */
+    line-height: 1.6; /* Melhor legibilidade */
+}
+
+.info-section button {
+    margin-top: 20px; /* Espaçamento acima do botão */
+}
+
+/* Profile Section (Nelsinho) */
+.profile-section {
+    background-color: var(--light-text);
+    padding: 50px 0;
+}
+/* ... (restante dos estilos da profile-section, proposals, etc.) ... */
+.profile-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+.profile-pic {
+    display: block;
+    margin: 0 auto; /* Centraliza a imagem */
+    border-radius: 50%; /* Torna a imagem circular */
+    border: 5px solid var(--primary-red); /* Adiciona uma borda */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Adiciona sombra */
+    width: 150px; /* Define um tamanho fixo */
+    height: 150px; /* Garante proporção circular */
+    object-fit: cover; /* Garante que a imagem se ajuste ao container */
+}
+.profile-header h2 {
+    text-align: left;
+    font-size: 2.2rem;
+    margin: 0;
+    color: var(--primary-red);
+}
+.profile-content p {
+    font-size: 1.4rem; /* Aumenta o tamanho do texto em seções importantes */
+    text-align: justify;
+    columns: 2; /* Opcional: dividir biografia em colunas */
+    column-gap: 40px;
+}
+
+/* Proposals Section */
+.proposals-section {
+    background-color: var(--light-red-bg);
+    padding: 50px 0;
+}
+.proposals-section h2 { margin-bottom: 40px; }
+.proposals-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+}
+.proposal-card {
+    background-color: var(--light-text);
+    padding: 25px;
+    border-radius: var(--border-radius);
+    border-left: 6px solid var(--primary-red);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    display: flex;
+    align-items: center; /* Alinhar estrela e texto verticalmente */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.proposal-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.12);
+}
+.proposal-card .star-icon {
+    font-size: 1.8rem;
+    color: var(--primary-red);
+    margin-right: 18px;
+    line-height: 1;
+}
+.proposal-card p { margin-bottom: 0; font-size: 1.05rem; }
+
+
+/* How to Vote Section */
+.vote-info-section {
+    background-color: var(--primary-red);
+    color: var(--light-text);
+    padding: 50px 0;
+    text-align: center;
+}
+
+.vote-info-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    color: var(--light-text);
+}
+
+.vote-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.vote-item {
+    background-color: var(--light-text);
+    color: var(--text-color);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.vote-item.main-vote {
+    border: 3px solid var(--yellow-highlight); /* Destaque para o voto principal */
+}
+
+.vote-label {
+    font-size: 1.4rem; /* Aumenta o tamanho das descrições */
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.vote-name {
+    font-size: 1.4rem; /* Aumenta o tamanho do texto em seções importantes */
+    font-weight: bold;
+    color: var(--primary-red);
+}
+
+.vote-number {
+    font-size: 2rem; /* Aumenta o tamanho dos números de votos */
+    font-weight: bold;
+    color: var(--dark-red);
+}
+
+/* Chapa Section */
+.chapa-section {
+    background-color: var(--light-red-bg); /* Fundo suave */
+    padding: 50px 0;
+    text-align: center;
+    color: var(--text-color);
+}
+
+.chapa-section h2 {
+    font-size: 2.5rem;
+    color: var(--primary-red);
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.chapa-section h2 .highlight {
+    color: var(--yellow-highlight); /* Destaque para "Experiência e Renovação" */
+}
+
+.chapa-section h2 .chapa-number {
+    font-size: 3rem; /* Destaque para o número da chapa */
+    font-weight: bold;
+    color: var(--dark-red);
+}
+
+.chapa-section .slogan {
+    font-size: 1.3rem;
+    font-style: italic;
+    color: var(--text-color);
+    margin-top: 10px;
+    line-height: 1.5;
+}
+
+/* Footer */
+footer {
+    background-color: #222; /* Um cinza mais escuro para o rodapé */
+    color: #bbb;
+    padding: 40px 0;
+    font-size: 1.1rem; /* Aumenta o texto do rodapé */
+}
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+.footer-links h4, .footer-social h4 {
+    font-family: var(--title-font);
+    color: var(--light-text);
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+.footer-links a {
+    display: block;
+    color: #bbb;
+    margin-bottom: 8px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+.footer-links a:hover {
+    color: var(--yellow-highlight);
+}
+.footer-social img {
+    width: 28px;
+    height: 28px;
+    margin-right: 10px;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+.footer-social img:hover {
+    opacity: 1;
+}
+.copyright {
+    text-align: center;
+    border-top: 1px solid #444;
+    padding-top: 20px;
+    font-size: 0.85rem;
+    color: #888;
+}
+
+
+/* Estilo do modal */
+.modal {
+    display: none; /* Escondido por padrão */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8); /* Fundo escuro com transparência */
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-content h2 {
+    font-size: 1.8rem;
+    color: #e4142c; /* Vermelho PT */
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: 'Anton', sans-serif;
+}
+
+.modal-content .chapa-list {
+    max-height: 400px;
+    overflow-y: auto;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.modal-content .chapa-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+    font-size: 1rem;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    align-items: center;
+}
+
+.modal-content .chapa-list li:last-child {
+    border-bottom: none;
+}
+
+.modal-content .star-icon {
+    color: #FFD700; /* Dourado */
+    margin-right: 10px;
+    font-size: 1.2rem;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #e4142c; /* Vermelho PT */
+    text-decoration: none;
+}
+
+/* Animação de entrada */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+    .main-title { font-size: 3.5rem; }
+    .profile-content p { columns: 1; }
+    #main-nav ul { display: none; } /* Esconder menu desktop, implementar menu mobile depois */
+    .nav-container { justify-content: center; } /* Centralizar logo se menu sumir */
+}
+
+@media (max-width: 768px) {
+    body { padding-top: 60px; } /* Ajustar para altura da nav mobile se diferente */
+    #main-nav { height: 60px; }
+    .nav-logo span { display: none; } /* Esconder texto do logo na nav mobile */
+    #nav-party-logo { height: 30px; }
+
+    .main-title { font-size: 2.8rem; letter-spacing: -0.5px; text-align: center; }
+    .starburst-shape { width: 220px; height: 220px; left: 50%; transform: translate(-50%, -50%) rotate(15deg); }
+    .hero-cta h2 { font-size: 1.3rem; }
+    #timer { flex-direction: column; gap: 8px; }
+    .time-block { min-width: 150px; } /* Para acomodar texto quando empilhado */
+
+    .candidate-container-flex { flex-direction: column; align-items: center; }
+    .candidate { margin-bottom: 30px; width: 90%; max-width: 350px; }
+    .candidate:last-child { margin-bottom: 0; }
+
+    .profile-header { flex-direction: column; text-align: center; align-items: center; }
+    h2 { font-size: 2rem; }
+    .info-section h2, .profile-header h2 { font-size: 1.8rem; }
+    .info-section p { font-size: 1.1rem; }
+
+    .footer-content { flex-direction: column; text-align: center; }
+    .footer-links, .footer-social { margin-bottom: 20px; }
+}
+
+@media (max-width: 600px) {
+    .logo-container {
+        max-width: 120px;
+        padding-bottom: 10px;
+    }
+    #party-logo {
+        max-width: 100%;
+        width: 100px;
+        height: auto;
+    }
+    .hero {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .hero-container {
+        padding-top: 30px;
+        padding-bottom: 15px;
+    }
+    .main-title {
+        font-size: 1.5rem;
+        padding-left: 0;
+        text-align: center;
+        letter-spacing: 0;
+        margin-bottom: 10px;
+    }
+    .starburst-shape {
+        width: 100px;
+        height: 100px;
+        left: 50%;
+        top: 30px;
+        transform: translate(-50%, 0) rotate(10deg);
+    }
+    .hero-content {
+        padding: 0 5px;
+    }
+    .hero-title-container {
+        margin-bottom: 18px;
+    }
+    .hero-cta {
+        margin: 10px 0 15px 0;
+    }
+    .hero-cta h2 {
+        font-size: 1rem;
+        padding: 10px 8px;
+        border-radius: 4px;
+        line-height: 1.2;
+    }
+    #countdown-timer {
+        margin: 10px 0;
+    }
+    #timer {
+        gap: 6px;
+    }
+    .time-block {
+        min-width: 100px;
+        font-size: 0.95rem;
+        padding: 8px 0;
+    }
+    .time-block span {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-title { font-size: 2rem; }
+    .starburst-shape { width: 180px; height: 180px; }
+    .hero-cta h2 { font-size: 1.1rem; padding: 10px 20px; }
+    h2 { font-size: 1.8rem; }
+    .info-section h2, .profile-header h2 { font-size: 1.5rem; }
+    .profile-pic { width: 150px; height: 150px; }
+    .candidate img { width: 110px; height: 110px; }
+    .candidate.nelsinho-main img { width: 130px; height: 130px; }
+    .candidate-name { font-size: 1.3rem; }
+    .vote-number-badge { font-size: 1.6rem; padding: 6px 20px; }
+    .proposal-card { padding: 20px; }
+    .proposal-card .star-icon { font-size: 1.5rem; margin-right: 12px; }
+}
+
+/* Button Styles */
+.btn {
+    background-color: var(--primary-red);
+    color: var(--light-text);
+    padding: 12px 25px; /* Ajusta o padding para acompanhar o tamanho do texto */
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 1.2rem; /* Aumenta o tamanho do texto dos botões */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px; /* Espaçamento entre os botões */
+    display: inline-block;
+    text-align: center;
+}
+
+.btn:hover {
+    background-color: var(--dark-red);
+}
+
+/* Group Photo Styles */
+.group-photo {
+    display: block;
+    margin: 20px auto; /* Centraliza a imagem */
+    max-width: 100%; /* Garante que a imagem não ultrapasse o container */
+    height: auto; /* Mantém a proporção da imagem */
+    border-radius: 10px; /* Bordas arredondadas */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Adiciona uma sombra suave */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animações suaves */
+}
+
+.group-photo:hover {
+    transform: scale(1.03); /* Leve zoom ao passar o mouse */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Sombra mais intensa no hover */
+}
+
+/* Estilo para a estrela na lista */
+.star-icon {
+    color: #ff0000; /* Cor dourada */
+    margin-right: 8px; /* Espaço entre a estrela e o nome */
+    font-size: 1rem; /* Tamanho da estrela */
+    vertical-align: middle; /* Alinha a estrela com o texto */
+}
