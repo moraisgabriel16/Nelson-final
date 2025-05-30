@@ -45,6 +45,87 @@
             transform: scale(1.1);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
         }
+
+        /* Estilo do modal aprimorado */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.7); /* Fundo escuro com transparência */
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 10% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .modal-title {
+            text-align: center;
+            color: #d32f2f; /* Vermelho PT */
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .agenda-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .agenda-list li {
+            margin-bottom: 15px;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #333;
+        }
+
+        .agenda-list li strong {
+            color: #d32f2f; /* Destaque em vermelho */
+        }
+
+        .event-detail {
+            display: block;
+            font-size: 0.9rem;
+            color: #555;
+            margin-top: 5px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #d32f2f;
+            text-decoration: none;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 <body>
@@ -115,10 +196,33 @@
                 <p><strong>Data:</strong> 06 de Julho (Domingo) das 9h às 17h</p>
                 <p><strong>Local:</strong> Emef Marechal Bittencourt</p>
                 <p><strong>Endereço:</strong> Rua Avelino Lopes, Centro - Osasco</p>
-                <button id="add-to-calendar" class="btn">Adicionar à Agenda</button>
+                <button id="view-agenda" class="btn">Ver Agenda</button>
                 <button id="download-journal" class="btn" onclick="window.location.href='docs/JORNAL_NELSINHO.pdf'">Baixar Jornal Nelsinho</button>
             </div>
         </section>
+
+        <!-- Modal da Agenda -->
+        <div id="agendaModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2 class="modal-title">Agenda de Eventos</h2>
+                <ul class="agenda-list">
+                    <li>
+                        <strong>02/06:</strong> Rua André Manojo, 207, Centro - Osasco – 19h00<br>
+                        <span class="event-detail">Com a presença do Deputado Emidio de Souza</span>
+                    </li>
+                    <li>
+                        <strong>05/06:</strong> Reunião com Filiados do PT - Bar do Tadeu, Rua Ciro dos Anjos, 297 – Bairro Bela Vista – 19h00
+                    </li>
+                    <li>
+                        <strong>07/06:</strong> Reuniões com Filiados do PT - Rua Azaleia Vermelha, 35 – Rochdalle – 18h00
+                    </li>
+                    <li>
+                        <strong>14/06:</strong> Reunião com Filiados do PT - Rua São Francisco, 4 – Vila Menk – 17h00
+                    </li>
+                </ul>
+            </div>
+        </div>
 
         <section id="nelsinho-profile" class="profile-section">
             <div class="container">
@@ -364,6 +468,25 @@
         window.onclick = function(event) {
             if (event.target == modal) {
                 modal.style.display = "none";
+            }
+        }
+
+        // Script para o modal da agenda
+        var agendaModal = document.getElementById("agendaModal");
+        var viewAgendaBtn = document.getElementById("view-agenda");
+        var closeAgenda = document.querySelector("#agendaModal .close");
+
+        viewAgendaBtn.onclick = function() {
+            agendaModal.style.display = "block";
+        }
+
+        closeAgenda.onclick = function() {
+            agendaModal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == agendaModal) {
+                agendaModal.style.display = "none";
             }
         }
     </script>
