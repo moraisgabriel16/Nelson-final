@@ -46,7 +46,7 @@
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
         }
 
-        /* Estilo do modal aprimorado */
+        /* Estilo aprimorado do modal */
         .modal {
             display: none;
             position: fixed;
@@ -56,24 +56,35 @@
             width: 100%;
             height: 100%;
             overflow: auto;
-            background-color: rgba(0, 0, 0, 0.7); /* Fundo escuro com transparência */
+            background-color: rgba(0, 0, 0, 0.8); /* Fundo escuro com mais transparência */
+            animation: fadeIn 0.5s ease-in-out; /* Animação de entrada */
         }
 
         .modal-content {
             background-color: #fff;
             margin: 10% auto;
-            padding: 20px;
-            border-radius: 10px;
-            width: 80%;
+            padding: 30px;
+            border-radius: 15px; /* Bordas arredondadas */
+            width: 90%;
             max-width: 600px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            animation: fadeIn 0.3s ease-in-out;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Sombra mais forte */
+            animation: scaleUp 0.3s ease-in-out; /* Animação de escala */
+        }
+
+        .modal-content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            border-radius: 10px; /* Bordas arredondadas na imagem */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra na imagem */
         }
 
         .modal-title {
             text-align: center;
             color: #d32f2f; /* Vermelho PT */
-            font-size: 1.8rem;
+            font-size: 2rem;
+            font-weight: bold;
             margin-bottom: 20px;
         }
 
@@ -102,28 +113,42 @@
         }
 
         .close {
-            color: #aaa;
+            color: #fff;
             float: right;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: bold;
             cursor: pointer;
-            transition: color 0.3s ease;
+            background-color: #d32f2f; /* Botão de fechar em vermelho */
+            border: none;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.3s ease;
         }
 
         .close:hover,
         .close:focus {
-            color: #d32f2f;
-            text-decoration: none;
+            background-color: #b71c1c; /* Vermelho mais escuro ao passar o mouse */
         }
 
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(-20px);
             }
             to {
                 opacity: 1;
-                transform: translateY(0);
+            }
+        }
+
+        @keyframes scaleUp {
+            from {
+                transform: scale(0.8);
+            }
+            to {
+                transform: scale(1);
             }
         }
     </style>
@@ -208,19 +233,25 @@
                 <h2 class="modal-title">Agenda de Eventos</h2>
                 <ul class="agenda-list">
                     <li>
-                        <strong>02/06:</strong> Rua André Manojo, 207, Centro - Osasco – 19h00<br>
-                        <span class="event-detail">Com a presença do Deputado Emidio de Souza</span>
-                    </li>
-                    <li>
-                        <strong>05/06:</strong> Reunião com Filiados do PT - Bar do Tadeu, Rua Ciro dos Anjos, 297 – Bairro Bela Vista – 19h00
-                    </li>
-                    <li>
-                        <strong>07/06:</strong> Reuniões com Filiados do PT - Rua Azaleia Vermelha, 35 – Rochdalle – 18h00
-                    </li>
-                    <li>
                         <strong>14/06:</strong> Reunião com Filiados do PT - Rua São Francisco, 4 – Vila Menk – 17h00
                     </li>
+                    <li style="text-align: center; font-style: italic; color: #555;">
+                        Mais datas em breve.
+                    </li>
                 </ul>
+            </div>
+        </div>
+
+        <!-- Modal da Festa -->
+        <div id="partyModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2 class="modal-title">Arraiá PT - Experiência e Renovação</h2>
+                <img src="img/party.jpg" alt="Festa de Celebração">
+                <p style="text-align: center; font-size: 1.2rem; color: #333; margin-top: 15px;">
+                    Venha participar do nosso Arraiá no dia <strong>28 de Junho</strong>, às <strong>18h</strong>, na <strong>UAPO</strong>! 
+                    Rua Minas Bogasian, 95 - Centro, Osasco.
+                </p>
             </div>
         </div>
 
@@ -487,6 +518,27 @@
         window.onclick = function(event) {
             if (event.target == agendaModal) {
                 agendaModal.style.display = "none";
+            }
+        }
+
+        // Script para o modal da festa
+        var partyModal = document.getElementById("partyModal");
+        var closePartyModal = partyModal.querySelector(".close");
+
+        // Exibe o modal automaticamente ao carregar a página
+        window.onload = function() {
+            partyModal.style.display = "block";
+        };
+
+        // Fecha o modal ao clicar no botão de fechar
+        closePartyModal.onclick = function() {
+            partyModal.style.display = "none";
+        };
+
+        // Fecha o modal ao clicar fora dele
+        window.onclick = function(event) {
+            if (event.target == partyModal) {
+                partyModal.style.display = "none";
             }
         }
     </script>
