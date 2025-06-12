@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PT Osasco - Partido dos Trabalhadores</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="img/logo-pt.svg">
+
+    <style>
+        /* Variáveis CSS */
+        :root {
+            --primary-color: #d32f2f;
+            --secondary-color: #b71c1c;
+            --text-color: #333;
+            --light-text: #fff;
+            --background-light: #f5f5f5;
+            --spacing-small: 1rem;
+            --spacing-medium: 2rem;
+            --spacing-large: 4rem;
+        }
+
+        /* Reset e Estilos Globais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spacing-small);
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: var(--spacing-medium);
+            color: var(--primary-color);
+        }
+
+        /* Navegação */
+        #main-nav {
+            background: var(--primary-color);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            color: var(--light-text);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        #nav-party-logo {
+            height: 40px;
+            margin-right: 1rem;
+        }
+
+        #main-nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        #main-nav ul a {
+            color: var(--light-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        #main-nav ul a:hover {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                        url('img/grupo-apoiadores.jpg') center/cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            color: var(--light-text);
+            text-align: center;
+            padding-top: 60px;
+        }
+
+        .logo-container img {
+            height: 150px;
+            margin-bottom: var(--spacing-medium);
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-family: 'Anton', sans-serif;
+        }
+
+        .hero-content h2 {
+            font-size: 2rem;
+            font-weight: 400;
+            color: var(--light-text);
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            opacity: 0.9;
+        }
+
+        /* História */
+        .history-section {
+            padding: var(--spacing-large) 0;
+            background: var(--background-light);
+        }
+
+        .history-content p {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto var(--spacing-medium);
+        }
+
+        .timeline {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline-item {
+            border-left: 3px solid var(--primary-color);
+            padding: 1rem 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            background: white;
+            border-radius: 0 10px 10px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .timeline-item::before {
+            content: '';
+            width: 15px;
+            height: 15px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            position: absolute;
+            left: -9px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .timeline-item h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Valores */
+        .values-section {
+            padding: var(--spacing-large) 0;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: var(--spacing-medium);
+        }
+
+        .value-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .value-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        /* Compromissos */
+        .commitments-section {
+            padding: var(--spacing-large) 0;
+            background: var(--background-light);
+        }
+
+        .commitments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .commitment-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .commitment-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        /* Contato */
+        .contact-section {
+            padding: var(--spacing-large) 0;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .contact-card {
+            text-align: center;
+            padding: 2rem;
+            background: var(--background-light);
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Footer */
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-links {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-links h4, .footer-social h4 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--light-text);
+        }
+
+        .footer-links a {
+            display: block;
+            color: var(--light-text);
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-social {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .footer-social a {
+            margin: 0.5rem;
+            transition: transform 0.3s ease;
+            line-height: 0;
+        }
+
+        .footer-social img {
+            width: 24px; /* Reduzindo o tamanho dos ícones */
+            height: 24px;
+            filter: brightness(0) invert(1);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: var(--spacing-medium);
+            padding-top: var(--spacing-small);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .footer {
+            background: var(--secondary-color);
+            padding: var(--spacing-small);
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer p {
+            color: var(--light-text);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .footer a {
+            color: var(--light-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer a:hover {
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-button {
+                display: block;
+            }
+
+            #main-nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--primary-color);
+                flex-direction: column;
+                padding: 1rem 0;
+            }
+
+            #main-nav ul.active {
+                display: flex;
+            }
+
+            #main-nav ul li {
+                text-align: center;
+                padding: 0.5rem 0;
+            }
+
+            .achievement-number {
+                font-size: 2.5rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .hero-content h2 {
+                font-size: 1.2rem;
+            }
+
+            .value-card, .commitment-card {
+                padding: 1.5rem;
+            }
+
+            .container {
+                width: 95%;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .footer-social {
+                align-items: center;
+            }
+
+            .footer-links, .footer-social {
+                width: 100%;
+            }
+        }
+
+        /* Conquistas */
+        .achievements-section {
+            padding: var(--spacing-large) 0;
+            background: linear-gradient(rgba(211, 47, 47, 0.9), rgba(211, 47, 47, 0.9)),
+                        url('img/grupo-apoiadores.jpg') center/cover fixed;
+            color: var(--light-text);
+        }
+
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: var(--spacing-medium);
+        }
+
+        .achievement-card {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+            transition: transform 0.3s ease;
+        }
+
+        .achievement-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .achievement-number {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            font-family: 'Anton', sans-serif;
+        }
+
+        .achievement-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* WhatsApp Float */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            width: 50px;  /* Reduzido de 60px para 50px */
+            height: 50px; /* Reduzido de 60px para 50px */
+            background-color: #25D366;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-float:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+            background-color: #20ba57;
+        }
+
+        .whatsapp-float img {
+            width: 28px;  /* Reduzido de 35px para 28px */
+            height: 28px; /* Reduzido de 35px para 28px */
+            filter: brightness(0) invert(1);
+        }
+
+        /* Ajuste responsivo para telas menores */
+        @media (max-width: 768px) {
+            .whatsapp-float {
+                width: 45px;
+                height: 45px;
+                bottom: 15px;
+                right: 15px;
+            }
+
+            .whatsapp-float img {
+                width: 24px;
+                height: 24px;
+            }
+        }
+
+        /* Menu Mobile */
+        .mobile-menu-button {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--light-text);
+            font-size: 24px;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            position: relative;
+            z-index: 1001;
+        }
+
+        .nav-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        #main-nav ul {
+            gap: 2rem;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .mobile-menu-button {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            #main-nav ul {
+                display: none;
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background: var(--primary-color);
+                flex-direction: column;
+                padding: 80px 2rem 2rem;
+                gap: 1.5rem;
+                z-index: 1000;
+                transition: right 0.3s ease;
+                box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+            }
+
+            #main-nav ul.active {
+                display: flex;
+                right: 0;
+            }
+
+            #main-nav ul li {
+                width: 100%;
+                text-align: left;
+            }
+
+            #main-nav ul a {
+                display: block;
+                padding: 10px 0;
+                font-size: 1.1rem;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .nav-overlay.active {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+<body>
+    <nav id="main-nav">
+        <div class="container nav-container">
+            <a href="#" class="nav-logo">
+                <img src="img/logo-pt.svg" alt="Logo PT" id="nav-party-logo"> 
+                <span>PT OSASCO</span>
+            </a>
+            <button class="mobile-menu-button" aria-label="Menu">☰</button>
+            <div class="nav-overlay"></div>
+            <ul>
+                <li><a href="#hero-section">Início</a></li>
+                <li><a href="#history">Nossa História</a></li>
+                <li><a href="#values">Valores</a></li>
+                <li><a href="#commitments">Compromissos</a></li>
+                <li><a href="#contact">Contato</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero" id="hero-section">
+        <div class="container hero-container">
+            <div class="logo-container" data-aos="fade-down">
+                <img src="img/logo-pt.svg" alt="Logo PT" id="party-logo">
+            </div>
+            <div class="hero-content" data-aos="fade-up">
+                <h1>PARTIDO DOS TRABALHADORES</h1>
+                <h2>40 ANOS DE HISTÓRIA EM OSASCO</h2>
+                <p class="hero-subtitle">Construindo uma cidade mais justa e democrática desde 1980</p>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="history" class="history-section">
+            <div class="container">
+                <h2 data-aos="fade-up">NOSSA HISTÓRIA</h2>
+                <div class="history-content" data-aos="fade-up">
+                    <p>O PT de Osasco nasceu da união de trabalhadores, jovens da Igreja Católica e militantes de direitos humanos nos anos 1980. Nossa história começou nas comunidades eclesiais de base, na Pastoral da Juventude e nos movimentos populares contra a ditadura.</p>
+                    
+                    <div class="timeline">
+                        <div class="timeline-item" data-aos="fade-right">
+                            <h3>1980</h3>
+                            <p>Fundação do PT em Osasco, com participação ativa de lideranças como Nelson Matias (Nelsinho) e Marcos Martins.</p>
+                        </div>
+                        <div class="timeline-item" data-aos="fade-left">
+                            <h3>2004</h3>
+                            <p>Primeira vitória na Prefeitura com Emídio de Souza, iniciando um ciclo de transformações na cidade.</p>
+                        </div>
+                        <div class="timeline-item" data-aos="fade-right">
+                            <h3>2005-2012</h3>
+                            <p>Período de grandes avanços: 18 novas escolas, 15 UBSs, redução do desemprego e salto econômico da cidade.</p>
+                        </div>
+                        <div class="timeline-item" data-aos="fade-left">
+                            <h3>2025</h3>
+                            <p>Renovação e fortalecimento do partido, mantendo vivos os ideais de seus fundadores.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="values" class="values-section">
+            <div class="container">
+                <h2 data-aos="fade-up">NOSSOS VALORES</h2>
+                <div class="values-grid">
+                    <div class="value-card" data-aos="flip-left">
+                        <h3>Democracia e Participação Popular</h3>
+                        <p>Gestão pública construída com a população, através de plenárias, encontros e conselhos.</p>
+                    </div>
+                    <div class="value-card" data-aos="flip-up">
+                        <h3>Transparência e Ética</h3>
+                        <p>Compromisso com a honestidade e prestação de contas em todas as esferas.</p>
+                    </div>
+                    <div class="value-card" data-aos="flip-right">
+                        <h3>Justiça Social</h3>
+                        <p>Redução das desigualdades e defesa dos direitos dos menos favorecidos.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="commitments" class="commitments-section">
+            <div class="container">
+                <h2 data-aos="fade-up">NOSSOS COMPROMISSOS</h2>
+                <div class="commitments-grid">
+                    <div class="commitment-card" data-aos="zoom-in">
+                        <h3>Governança Participativa</h3>
+                        <p>Ampliação dos instrumentos de participação popular e fortalecimento dos conselhos de bairros.</p>
+                    </div>
+                    <div class="commitment-card" data-aos="zoom-in">
+                        <h3>Desenvolvimento Sustentável</h3>
+                        <p>Projetos que aliam crescimento econômico com justiça social e respeito ao meio ambiente.</p>
+                    </div>
+                    <div class="commitment-card" data-aos="zoom-in">
+                        <h3>Serviços Públicos de Qualidade</h3>
+                        <p>Expansão e melhoria contínua da educação, saúde e segurança para todos.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="achievements" class="achievements-section">
+            <div class="container">
+                <h2 data-aos="fade-up">CONQUISTAS PARA OSASCO</h2>
+                <div class="achievements-grid">
+                    <div class="achievement-card" data-aos="zoom-in">
+                        <div class="achievement-number">18</div>
+                        <h3>Novas Escolas</h3>
+                        <p>Construídas durante a gestão PT</p>
+                    </div>
+                    <div class="achievement-card" data-aos="zoom-in">
+                        <div class="achievement-number">15</div>
+                        <h3>UBSs</h3>
+                        <p>Unidades Básicas de Saúde</p>
+                    </div>
+                    <div class="achievement-card" data-aos="zoom-in">
+                        <div class="achievement-number">14</div>
+                        <h3>Centros Digitais</h3>
+                        <p>Inclusão digital para todos</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <h2 data-aos="fade-up">ENTRE EM CONTATO</h2>
+                <div class="contact-info">
+                    <div class="contact-card" data-aos="fade-up">
+                        <h3>Diretório Municipal</h3>
+                        <p>Rua Avelino Lopes, Centro - Osasco</p>
+                    </div>
+                    <div class="contact-card" data-aos="fade-up">
+                        <h3>Telefone</h3>
+                        <p>(11) 91978-4885</p>
+                    </div>
+                    <div class="contact-card" data-aos="fade-up">
+                        <h3>Redes Sociais</h3>
+                        <div class="social-links">
+                            <a href="https://www.facebook.com/ptosasco" target="_blank">Facebook</a>
+                            <a href="https://www.instagram.com/ptosasco" target="_blank">Instagram</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <h4>Links Úteis</h4>
+                    <a href="https://pt.org.br/" target="_blank">PT Nacional</a>
+                    <a href="https://www.instagram.com/ptosasco/" target="_blank">PT Osasco</a>
+                </div>
+                <div class="footer-social">
+                    <h4>Siga-nos nas Redes</h4>
+                    <div style="display: flex; gap: 1rem;">
+                        <a href="https://www.facebook.com/ptosasco" target="_blank" aria-label="Facebook">
+                            <img src="img/icon-facebook.svg" alt="Facebook">
+                        </a>
+                        <a href="https://www.instagram.com/ptosasco" target="_blank" aria-label="Instagram">
+                            <img src="img/icon-instagram.svg" alt="Instagram">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <p>
+                &copy; 2025 <a href="https://www.moraisdigitalsolutions.site/" target="_blank">BNT - Soluções Digitais</a>. Todos os direitos reservados.
+            </p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/5511919784885" target="_blank" class="whatsapp-float" aria-label="Contate-nos pelo WhatsApp">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+    </a>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+
+        // Menu mobile aprimorado
+        const mobileButton = document.querySelector('.mobile-menu-button');
+        const nav = document.querySelector('#main-nav ul');
+        const overlay = document.querySelector('.nav-overlay');
+        const menuItems = document.querySelectorAll('#main-nav ul a');
+
+        function closeMenu() {
+            nav.classList.remove('active');
+            overlay.classList.remove('active');
+            mobileButton.textContent = '☰';
+            document.body.style.overflow = '';
+        }
+
+        function openMenu() {
+            nav.classList.add('active');
+            overlay.classList.add('active');
+            mobileButton.textContent = '✕';
+            document.body.style.overflow = 'hidden';
+        }
+
+        mobileButton.addEventListener('click', () => {
+            if (nav.classList.contains('active')) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+        });
+
+        // Fechar menu ao clicar no overlay
+        overlay.addEventListener('click', closeMenu);
+
+        // Fechar menu ao clicar em um item
+        menuItems.forEach(item => {
+            item.addEventListener('click', closeMenu);
+        });
+
+        // Fechar menu ao redimensionar para desktop
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                closeMenu();
+            }
+        });
+    </script>
+</body>
+</html>
