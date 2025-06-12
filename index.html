@@ -62,11 +62,11 @@
 
         .modal-content {
             background-color: #fff;
-            margin: 10% auto;
-            padding: 30px;
-            border-radius: 15px; /* Bordas arredondadas */
-            width: 90%;
-            max-width: 600px;
+            margin: 5% auto; /* Reduz a margem para caber melhor em telas menores */
+            padding: 20px; /* Ajusta o padding para telas menores */
+            border-radius: 15px;
+            width: 90%; /* Mantém o modal responsivo */
+            max-width: 500px; /* Limita o tamanho máximo */
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Sombra mais forte */
             animation: scaleUp 0.3s ease-in-out; /* Animação de escala */
         }
@@ -83,9 +83,9 @@
         .modal-title {
             text-align: center;
             color: #d32f2f; /* Vermelho PT */
-            font-size: 2rem;
+            font-size: 1.5rem; /* Reduz o tamanho da fonte para telas menores */
             font-weight: bold;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .agenda-list {
@@ -132,6 +132,29 @@
         .close:hover,
         .close:focus {
             background-color: #b71c1c; /* Vermelho mais escuro ao passar o mouse */
+        }
+
+        .modal-content p {
+            font-size: 1rem; /* Ajusta o tamanho do texto */
+            line-height: 1.5;
+            color: #333;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        /* Ajustes específicos para telas menores */
+        @media (max-width: 768px) {
+            .modal-content {
+                padding: 15px; /* Reduz o padding em telas menores */
+            }
+
+            .modal-title {
+                font-size: 1.3rem; /* Ajusta o tamanho do título */
+            }
+
+            .modal-content p {
+                font-size: 0.9rem; /* Ajusta o tamanho do texto */
+            }
         }
 
         @keyframes fadeIn {
